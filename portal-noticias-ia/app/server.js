@@ -7,20 +7,21 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Configurar EJS como motor de plantillas
+// Configurar EJS
 app.set('view engine', 'ejs');
-
-// Indicar dónde se encuentran las vistas
 app.set('views', path.join(__dirname, 'views'));
 
-// Ruta principal
+// Servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Página principal
 app.get('/', (req, res) => {
   res.render('index', {
     noticias: noticias
   });
 });
 
-// Ruta para consultar una noticia individual
+// Página individual
 app.get('/noticias/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 

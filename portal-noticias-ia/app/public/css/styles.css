@@ -1,0 +1,991 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --white: #ffffff;
+  --black: #111111;
+  --charcoal: #222222;
+  --gray: #6d6d6d;
+  --light-gray: #ececec;
+  --red: #e31212;
+
+  --page-width: 1400px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.site-header {
+  max-width: var(--page-width);
+
+  margin: 0 auto;
+
+  padding: 0 32px;
+}
+
+.top-header {
+  min-height: 130px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 30px;
+
+  padding: 28px 0 20px;
+
+  border-bottom: 4px solid var(--black);
+}
+
+
+/* =====================================================
+   LOGOTIPO
+===================================================== */
+
+.logo {
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+
+  font-size: 2.1rem;
+  font-weight: 900;
+
+  line-height: 0.9;
+
+  letter-spacing: -1.5px;
+}
+
+.logo span {
+  color: var(--red);
+
+  font-size: 4.6rem;
+  font-weight: 900;
+
+  letter-spacing: -4px;
+}
+
+.academic-label {
+  background: var(--red);
+  color: var(--white);
+
+  padding: 9px 13px;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1.2px;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+.main-nav {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+
+  overflow-x: auto;
+
+  border-bottom: 1px solid var(--black);
+
+  font-size: 0.76rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+
+  scrollbar-width: none;
+}
+
+.main-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.main-nav a {
+  color: var(--red);
+}
+
+
+/* =====================================================
+   CONTENEDOR GENERAL
+===================================================== */
+
+.page-container {
+  max-width: var(--page-width);
+
+  margin: 0 auto;
+
+  padding: 28px 32px 70px;
+}
+
+
+/* =====================================================
+   AVISO DE IA
+===================================================== */
+
+.academic-notice {
+  display: grid;
+
+  grid-template-columns: 50px 1fr;
+
+  gap: 20px;
+
+  padding: 18px 0;
+
+  margin-bottom: 34px;
+
+  border-bottom: 1px solid var(--black);
+}
+
+.notice-marker {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--red);
+  color: var(--white);
+
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.academic-notice p {
+  max-width: 950px;
+
+  color: var(--charcoal);
+
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   PORTADA ASIMÉTRICA
+===================================================== */
+
+.lead-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(320px, 1fr);
+
+  gap: 40px;
+
+  padding-bottom: 42px;
+
+  border-bottom: 4px solid var(--black);
+}
+
+
+/* =====================================================
+   NOTICIA PRINCIPAL
+===================================================== */
+
+.lead-story {
+  padding-right: 40px;
+
+  border-right: 1px solid var(--black);
+}
+
+.story-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-bottom: 15px;
+
+  color: var(--gray);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.category-label {
+  color: var(--red);
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+.lead-story h1 {
+  max-width: 1000px;
+
+  margin-bottom: 28px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: clamp(3.3rem, 6vw, 6.3rem);
+  font-weight: 900;
+
+  line-height: 0.93;
+
+  letter-spacing: -4px;
+}
+
+.lead-summary {
+  max-width: 850px;
+
+  margin-bottom: 28px;
+
+  color: var(--charcoal);
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 1.25rem;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   IMAGEN PRINCIPAL
+===================================================== */
+
+.lead-image {
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   PIE DE NOTICIA
+===================================================== */
+
+.story-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 30px;
+}
+
+.story-footer p {
+  max-width: 550px;
+
+  color: var(--gray);
+
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+
+.story-footer strong {
+  color: var(--black);
+}
+
+
+/* =====================================================
+   ENLACES EDITORIALES
+===================================================== */
+
+.editorial-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  width: fit-content;
+
+  padding-bottom: 4px;
+
+  border-bottom: 2px solid var(--red);
+
+  color: var(--black);
+
+  font-size: 0.8rem;
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  transition: color 0.2s ease;
+}
+
+.editorial-link span {
+  color: var(--red);
+
+  font-size: 1.2rem;
+}
+
+.editorial-link:hover {
+  color: var(--red);
+}
+
+
+/* =====================================================
+   NOTICIAS SECUNDARIAS
+===================================================== */
+
+.secondary-stories {
+  display: flex;
+  flex-direction: column;
+}
+
+.secondary-story {
+  display: grid;
+
+  grid-template-columns: 145px 1fr;
+
+  gap: 18px;
+
+  padding-bottom: 24px;
+
+  margin-bottom: 24px;
+
+  border-bottom: 1px solid var(--black);
+}
+
+.secondary-story:last-child {
+  margin-bottom: 0;
+}
+
+.secondary-image {
+  width: 145px;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+}
+
+.secondary-content .story-meta {
+  margin-bottom: 8px;
+}
+
+.secondary-content h2 {
+  margin-bottom: 10px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 1.5rem;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.7px;
+}
+
+.secondary-content h2 a {
+  transition: color 0.2s ease;
+}
+
+.secondary-content h2 a:hover {
+  color: var(--red);
+}
+
+.secondary-content > p {
+  margin-bottom: 12px;
+
+  color: var(--gray);
+
+  font-size: 0.85rem;
+
+  line-height: 1.5;
+}
+
+.secondary-content .editorial-link {
+  font-size: 0.69rem;
+}
+
+
+/* =====================================================
+   TÍTULO DE SECCIÓN
+===================================================== */
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+
+  gap: 18px;
+
+  padding: 25px 0 18px;
+
+  margin-bottom: 30px;
+
+  border-bottom: 1px solid var(--black);
+}
+
+.section-title span {
+  color: var(--red);
+
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.section-title h2 {
+  font-size: 2rem;
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: -1px;
+}
+
+
+/* =====================================================
+   NOTICIAS 5 Y 6
+===================================================== */
+
+.more-stories {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 40px;
+}
+
+.horizontal-story {
+  display: grid;
+
+  grid-template-columns:
+    0.85fr
+    1.15fr;
+
+  gap: 25px;
+
+  padding-bottom: 35px;
+}
+
+.horizontal-story + .horizontal-story {
+  padding-left: 40px;
+
+  border-left: 1px solid var(--black);
+}
+
+.horizontal-image {
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+}
+
+.horizontal-content h2 {
+  margin-bottom: 14px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 2rem;
+
+  line-height: 1.08;
+
+  letter-spacing: -1px;
+}
+
+.horizontal-content h2 a {
+  transition: color 0.2s ease;
+}
+
+.horizontal-content h2 a:hover {
+  color: var(--red);
+}
+
+.horizontal-content > p {
+  margin-bottom: 18px;
+
+  color: var(--gray);
+
+  font-size: 0.9rem;
+
+  line-height: 1.55;
+}
+
+.horizontal-content .story-footer {
+  display: block;
+}
+
+.horizontal-content .story-footer p {
+  margin-bottom: 13px;
+}
+
+
+/* =====================================================
+   FOOTER GENERAL
+===================================================== */
+
+.site-footer {
+  max-width: var(--page-width);
+
+  margin: 0 auto;
+
+  padding: 28px 32px 50px;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  border-top: 4px solid var(--black);
+}
+
+.footer-logo {
+  margin-bottom: 8px;
+
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.footer-logo span {
+  color: var(--red);
+}
+
+.site-footer p {
+  color: var(--gray);
+
+  font-size: 0.78rem;
+}
+
+.footer-meta {
+  text-align: right;
+}
+
+
+/* =====================================================
+   PÁGINA INDIVIDUAL
+===================================================== */
+
+.article-page {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 45px 0;
+}
+
+.article-back {
+  display: inline-flex;
+
+  margin-bottom: 38px;
+
+  padding-bottom: 3px;
+
+  border-bottom: 2px solid var(--red);
+
+  font-size: 0.78rem;
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  transition: color 0.2s ease;
+}
+
+.article-back:hover {
+  color: var(--red);
+}
+
+.article-heading {
+  padding-bottom: 28px;
+
+  margin-bottom: 28px;
+
+  border-bottom: 1px solid var(--black);
+}
+
+.article-heading h1 {
+  margin: 18px 0;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: clamp(3rem, 7vw, 6rem);
+
+  line-height: 0.95;
+
+  letter-spacing: -4px;
+}
+
+.article-date {
+  color: var(--gray);
+
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   IMAGEN DEL ARTÍCULO
+===================================================== */
+
+.article-main-image {
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  margin-bottom: 35px;
+}
+
+
+/* =====================================================
+   RESUMEN DEL ARTÍCULO
+===================================================== */
+
+.article-lead {
+  display: grid;
+
+  grid-template-columns:
+    130px
+    1fr;
+
+  gap: 35px;
+
+  padding-bottom: 30px;
+
+  margin-bottom: 40px;
+
+  border-bottom: 1px solid var(--black);
+}
+
+.article-lead h2 {
+  color: var(--red);
+
+  font-size: 0.8rem;
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+.article-lead p {
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 1.4rem;
+
+  line-height: 1.55;
+}
+
+
+/* =====================================================
+   CUERPO DEL ARTÍCULO
+===================================================== */
+
+.article-body {
+  max-width: 760px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-body p {
+  margin-bottom: 27px;
+
+  color: var(--charcoal);
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 1.13rem;
+
+  line-height: 1.85;
+}
+
+
+/* =====================================================
+   ATRIBUCIÓN DE IA
+===================================================== */
+
+.article-attribution {
+  max-width: 760px;
+
+  margin: 50px auto 0;
+
+  padding: 22px 0;
+
+  border-top: 4px solid var(--black);
+  border-bottom: 1px solid var(--black);
+}
+
+.article-attribution p {
+  margin-bottom: 8px;
+
+  color: var(--gray);
+
+  font-size: 0.78rem;
+
+  line-height: 1.6;
+}
+
+.article-attribution strong {
+  color: var(--black);
+}
+
+
+/* =====================================================
+   TABLET / PANTALLAS MEDIAS
+===================================================== */
+
+@media (max-width: 1050px) {
+
+  .lead-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-story {
+    padding-right: 0;
+
+    border-right: none;
+  }
+
+  .secondary-stories {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+  }
+
+  .secondary-story {
+    display: block;
+  }
+
+  .secondary-image {
+    width: 100%;
+
+    margin-bottom: 16px;
+  }
+
+  .more-stories {
+    grid-template-columns: 1fr;
+  }
+
+  .horizontal-story + .horizontal-story {
+    padding-left: 0;
+    padding-top: 30px;
+
+    border-left: none;
+    border-top: 1px solid var(--black);
+  }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .site-header,
+  .page-container,
+  .site-footer {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .top-header {
+    min-height: auto;
+
+    align-items: flex-start;
+
+    padding-top: 22px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .logo span {
+    font-size: 2.8rem;
+
+    letter-spacing: -2px;
+  }
+
+  .academic-label {
+    padding: 7px 9px;
+
+    font-size: 0.58rem;
+  }
+
+  .main-nav {
+    gap: 18px;
+  }
+
+  .academic-notice {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-story h1 {
+    font-size: 3.15rem;
+
+    letter-spacing: -2.5px;
+  }
+
+  .lead-summary {
+    font-size: 1.05rem;
+  }
+
+  .story-footer {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .secondary-stories {
+    grid-template-columns: 1fr;
+  }
+
+  .secondary-story {
+    display: grid;
+
+    grid-template-columns:
+      115px
+      1fr;
+  }
+
+  .secondary-image {
+    width: 115px;
+
+    margin-bottom: 0;
+  }
+
+  .horizontal-story {
+    grid-template-columns: 1fr;
+  }
+
+  .horizontal-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .article-heading h1 {
+    font-size: 3.2rem;
+
+    letter-spacing: -2.5px;
+  }
+
+  .article-lead {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .article-body p {
+    font-size: 1.05rem;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+
+  .footer-meta {
+    text-align: left;
+  }
+
+}
+
+
+/* =====================================================
+   CELULARES PEQUEÑOS
+===================================================== */
+
+@media (max-width: 430px) {
+
+  .top-header {
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .lead-story h1 {
+    font-size: 2.75rem;
+  }
+
+  .secondary-story {
+    grid-template-columns: 95px 1fr;
+
+    gap: 14px;
+  }
+
+  .secondary-image {
+    width: 95px;
+  }
+
+  .secondary-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .article-heading h1 {
+    font-size: 2.65rem;
+  }
+
+}
