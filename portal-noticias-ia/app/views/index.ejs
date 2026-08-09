@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Nexus Tech News</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Nexus Tech News</h1>
+
+    <p>
+      Portal académico de noticias sobre tecnología e inteligencia artificial.
+    </p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Últimas noticias</h2>
+
+      <p>
+        Explora contenido académico relacionado con tecnología,
+        inteligencia artificial, ciberseguridad, computación,
+        robótica y desarrollo de software.
+      </p>
+    </section>
+
+    <section>
+
+      <% noticias.forEach((noticia) => { %>
+
+        <article>
+
+          <div>
+            Imagen relacionada
+          </div>
+
+          <p>
+            <strong><%= noticia.categoria %></strong>
+          </p>
+
+          <h2>
+            <%= noticia.titulo %>
+          </h2>
+
+          <p>
+            <strong>Fecha:</strong>
+            <%= noticia.fecha %>
+          </p>
+
+          <p>
+            <%= noticia.resumen %>
+          </p>
+
+          <p>
+            <strong>Fuente del texto:</strong>
+            <%= noticia.ia %>
+          </p>
+
+          <p>
+            <a href="/noticias/<%= noticia.id %>">
+              Leer noticia completa
+            </a>
+          </p>
+
+        </article>
+
+        <hr>
+
+      <% }); %>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <p>
+      <strong>Proyecto académico</strong>
+    </p>
+
+    <p>
+      El contenido presentado en este portal fue generado o asistido
+      mediante inteligencia artificial y fue revisado exclusivamente
+      con fines académicos.
+    </p>
+
+    <p>
+      Este contenido no debe considerarse información periodística
+      verificada.
+    </p>
+
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title><%= noticia.titulo %> | Nexus Tech News</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Nexus Tech News</h1>
+
+    <p>
+      Portal académico de noticias sobre tecnología e inteligencia artificial.
+    </p>
+  </header>
+
+  <main>
+
+    <article>
+
+      <p>
+        <strong><%= noticia.categoria %></strong>
+      </p>
+
+      <h1>
+        <%= noticia.titulo %>
+      </h1>
+
+      <p>
+        <strong>Fecha de publicación:</strong>
+        <%= noticia.fecha %>
+      </p>
+
+      <div>
+        Imagen relacionada
+      </div>
+
+      <h2>Resumen</h2>
+
+      <p>
+        <%= noticia.resumen %>
+      </p>
+
+      <h2>Contenido</h2>
+
+      <% noticia.contenido
+        .trim()
+        .split('\n\n')
+        .forEach((parrafo) => { %>
+
+          <p>
+            <%= parrafo.trim() %>
+          </p>
+
+      <% }); %>
+
+      <hr>
+
+      <p>
+        <strong>Fuente del texto:</strong>
+        <%= noticia.ia %>
+      </p>
+
+      <p>
+        <strong>Aviso:</strong>
+        Este contenido forma parte de un proyecto académico
+        y no debe considerarse información periodística verificada.
+      </p>
+
+      <p>
+        <a href="/">← Volver a todas las noticias</a>
+      </p>
+
+    </article>
+
+  </main>
+
+  <footer>
+
+    <p>
+      Proyecto académico — Portal de Noticias con IA,
+      Docker Compose y NGINX.
+    </p>
+
+  </footer>
+
+</body>
+</html>
