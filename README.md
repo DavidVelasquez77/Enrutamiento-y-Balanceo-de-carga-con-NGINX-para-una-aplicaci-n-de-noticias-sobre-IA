@@ -1,28 +1,18 @@
 # Nexus Tech News
 
-Portal académico de noticias tecnológicas generado o asistido mediante inteligencia artificial, contenerizado con Docker, orquestado mediante Docker Compose y publicado a través de NGINX como proxy inverso y balanceador de carga.
+Portal académico de noticias tecnológicas generado o asistido mediante inteligencia artificial, contenerizado con Docker, orquestado con Docker Compose y publicado mediante NGINX como proxy inverso y balanceador de carga.
 
 ---
 
-## 1. Descripción del proyecto
+## 1. Descripción
 
-**Nexus Tech News** es una aplicación web desarrollada como proyecto académico para demostrar el uso conjunto de:
+**Nexus Tech News** es una aplicación web desarrollada con fines académicos que presenta seis noticias relacionadas con tecnología.
 
-- Desarrollo web con Node.js y Express.
-- Generación de contenido mediante inteligencia artificial.
-- Renderizado dinámico de vistas mediante EJS.
-- Contenerización con Docker.
-- Orquestación de múltiples servicios con Docker Compose.
-- Redes internas entre contenedores.
-- Proxy inverso mediante NGINX.
-- Enrutamiento HTTP.
-- Balanceo de carga utilizando Round Robin.
-- Identificación de la instancia que atiende cada solicitud.
-- Continuidad del servicio ante la caída de una de las instancias.
+La solución utiliza dos instancias de la aplicación ejecutándose en contenedores Docker. NGINX funciona como único punto de entrada, proxy inverso y balanceador de carga, distribuyendo las solicitudes entre ambas instancias.
 
-El portal presenta seis noticias relacionadas con tecnología y permite consultar tanto el listado general como el contenido completo de cada noticia.
+El contenido textual de las noticias fue generado o asistido mediante **ChatGPT de OpenAI** y revisado para fines académicos.
 
-> **Aviso académico:** el contenido publicado fue generado o asistido mediante inteligencia artificial y revisado para fines educativos. No debe considerarse información periodística verificada.
+> **Aviso:** el contenido presentado en este portal fue generado o asistido mediante inteligencia artificial y no debe considerarse información periodística verificada.
 
 ---
 
@@ -36,16 +26,16 @@ El portal presenta seis noticias relacionadas con tecnología y permite consulta
 - HTML5
 - CSS3
 
-### Contenedores y despliegue
+### Contenedores y orquestación
 
 - Docker
 - Docker Compose
 
-### Proxy inverso y balanceo
+### Proxy inverso y balanceo de carga
 
 - NGINX
 
-### Inteligencia Artificial
+### Inteligencia artificial
 
 - ChatGPT de OpenAI
 
@@ -53,45 +43,18 @@ El portal presenta seis noticias relacionadas con tecnología y permite consulta
 
 ## 3. Arquitectura de la solución
 
-La solución utiliza tres contenedores principales:
+La solución está formada por tres servicios:
 
-1. `app1`: primera instancia del portal.
-2. `app2`: segunda instancia del portal.
-3. `nginx`: punto de entrada, proxy inverso y balanceador de carga.
+- `app1`: primera instancia de la aplicación.
+- `app2`: segunda instancia de la aplicación.
+- `nginx`: proxy inverso, punto de entrada y balanceador de carga.
 
-La arquitectura general es:
+Arquitectura general:
 
-```text
-                         USUARIO
-                            |
-                            |
-                    http://localhost:8080
-                            |
-                            v
-                    +---------------+
-                    |     NGINX     |
-                    | Proxy inverso |
-                    | Load Balancer |
-                    +-------+-------+
-                            |
-                        Round Robin
-                      /             \
-                     v               v
-              +-------------+ +-------------+
-              |    APP-1    | |    APP-2    |
-              | Node.js     | | Node.js     |
-              | Express     | | Express     |
-              | Puerto 3000 | | Puerto 3000 |
-              +------+------+ +------+------+
-                     \               /
-                      \             /
-                       +-----------+
-                       portal-network
-```
+![alt text](image.png)
+El usuario únicamente accede al sistema mediante NGINX.
 
-El usuario únicamente accede a NGINX mediante el puerto `8080`.
-
-Las instancias `APP-1` y `APP-2` no publican puertos directamente hacia el sistema anfitrión.
+Las instancias `APP-1` y `APP-2` permanecen dentro de la red interna de Docker y no publican directamente sus puertos hacia el sistema anfitrión.
 
 ---
 
@@ -142,127 +105,56 @@ portal-noticias-ia/
 
 ---
 
-## 5. Funcionalidades del portal
+## 5. Requisitos previos
 
-El portal incluye:
+Para ejecutar el proyecto se necesita:
 
-- Página principal con seis noticias.
-- Título para cada noticia.
-- Fecha de publicación.
-- Categoría.
-- Imagen relacionada.
-- Resumen.
-- Contenido completo.
-- Página individual de cada noticia.
-- Identificación de la herramienta de IA utilizada.
-- Advertencia sobre el uso académico de contenido generado mediante IA.
-- Diseño adaptable a computadoras, tabletas y dispositivos móviles.
-- Identificación visible de la instancia que atiende la solicitud.
-- Endpoint de estado `/health`.
-- Página personalizada para errores 404.
+- Docker
+- Docker Compose
+- Docker Desktop, en caso de utilizar Windows
 
----
-
-## 6. Noticias incluidas
-
-El portal contiene seis artículos relacionados con tecnología:
-
-1. Inteligencia Artificial.
-2. Ciberseguridad.
-3. Computación en la nube.
-4. Robótica.
-5. Videojuegos.
-6. Software de código abierto.
-
-Los textos fueron generados o asistidos con ChatGPT y revisados para fines académicos.
-
----
-
-## 7. Uso responsable de inteligencia artificial
-
-La aplicación de inteligencia artificial utilizada para generar el contenido fue:
-
-**ChatGPT de OpenAI**
-
-Cada noticia incluye la siguiente atribución:
-
-```text
-Contenido generado con ChatGPT y revisado para fines académicos.
-```
-
-El portal también muestra una advertencia general indicando que los textos no deben considerarse información periodística verificada.
-
-Los prompts principales utilizados se encuentran en:
-
-```text
-prompts/prompts.md
-```
-
-Durante la revisión del contenido se procuró evitar:
-
-- Información personal.
-- Declaraciones inventadas.
-- Estadísticas no verificadas.
-- Acontecimientos ficticios presentados como reales.
-- Información potencialmente engañosa.
-- Contenido inapropiado para un proyecto académico.
-
----
-
-## 8. Requisitos previos
-
-Para ejecutar el proyecto es necesario contar con:
-
-- Docker.
-- Docker Compose.
-- Docker Desktop en Windows, cuando corresponda.
-
-No es necesario ejecutar Node.js directamente en el sistema anfitrión para utilizar la solución final.
-
-Puede verificarse la instalación con:
+Puede comprobarse la instalación mediante:
 
 ```bash
 docker --version
 docker compose version
 ```
 
+No es necesario ejecutar Node.js directamente en el sistema anfitrión para utilizar la solución final.
+
 ---
 
-## 9. Construcción e inicio de la aplicación
+## 6. Construcción e inicio de los contenedores
 
-Ubicarse en la carpeta raíz del proyecto:
+Desde la carpeta raíz del proyecto:
 
 ```text
 portal-noticias-ia/
 ```
 
-Ejecutar:
+ejecutar:
 
 ```bash
 docker compose up --build -d
 ```
 
-Este único comando:
+Este comando:
 
-- Construye la imagen de la aplicación.
-- Crea la red interna.
-- Crea la instancia `APP-1`.
-- Crea la instancia `APP-2`.
-- Ejecuta los healthchecks.
-- Inicia NGINX.
-- Publica el portal mediante el puerto 8080.
+1. Construye la imagen de la aplicación a partir del `Dockerfile`.
+2. Crea la red interna de Docker.
+3. Inicia `APP-1`.
+4. Inicia `APP-2`.
+5. Ejecuta los healthchecks de las aplicaciones.
+6. Inicia NGINX.
+7. Publica el portal mediante el puerto `8080`.
 
----
-
-## 10. Verificar los contenedores
-
-Ejecutar:
+Para comprobar el estado de los servicios:
 
 ```bash
 docker compose ps
 ```
 
-Se deben observar tres servicios:
+Se deben observar los servicios:
 
 ```text
 app1
@@ -270,31 +162,25 @@ app2
 nginx
 ```
 
-Las aplicaciones deberán aparecer activas y saludables.
-
-Ejemplo esperado:
-
-```text
-app1     Up (healthy)
-app2     Up (healthy)
-nginx    Up
-```
+Las dos aplicaciones deben alcanzar el estado saludable.
 
 ---
 
-## 11. Dirección para acceder al portal
+## 7. Dirección para acceder al portal
 
-El portal debe abrirse únicamente mediante NGINX:
+El portal debe consultarse mediante:
 
 ```text
 http://localhost:8080
 ```
 
-No es necesario ni deseable acceder directamente a las instancias internas.
+NGINX es el único punto de entrada público de la solución.
+
+Las instancias internas no deben consultarse directamente mediante puertos del sistema anfitrión.
 
 ---
 
-## 12. Rutas configuradas
+## 8. Rutas configuradas
 
 ### Página principal
 
@@ -302,15 +188,17 @@ No es necesario ni deseable acceder directamente a las instancias internas.
 GET /
 ```
 
-Ejemplo:
+Dirección:
 
 ```text
 http://localhost:8080/
 ```
 
+Muestra el listado de las seis noticias.
+
 ---
 
-### Noticias individuales
+### Noticia individual
 
 ```text
 GET /noticias/:id
@@ -329,19 +217,21 @@ http://localhost:8080/noticias/6
 
 ---
 
-### Estado de la instancia
+### Estado de la aplicación
 
 ```text
 GET /health
 ```
 
-Ejemplo:
+Dirección:
 
 ```text
 http://localhost:8080/health
 ```
 
-Respuesta esperada:
+La respuesta identifica qué instancia atendió la solicitud.
+
+Ejemplo:
 
 ```json
 {
@@ -361,25 +251,20 @@ o:
 
 ---
 
-### Ruta inexistente
+### Página no encontrada
 
-Por ejemplo:
+Las rutas inexistentes devuelven una página personalizada con estado HTTP `404`.
+
+Ejemplos:
 
 ```text
 http://localhost:8080/noticias/999
-```
-
-o:
-
-```text
 http://localhost:8080/ruta-inexistente
 ```
 
-La aplicación responde con una página personalizada de error `404`.
-
 ---
 
-## 13. Dockerfile de la aplicación
+## 9. Dockerfile
 
 El archivo:
 
@@ -387,20 +272,22 @@ El archivo:
 app/Dockerfile
 ```
 
-permite construir la imagen del portal.
+contiene las instrucciones utilizadas para construir la imagen de la aplicación.
 
-El contenedor:
+La imagen:
 
-- Utiliza Node.js.
-- Instala las dependencias mediante `npm ci`.
-- Copia el código de la aplicación.
-- Expone internamente el puerto 3000.
+- Utiliza Node.js como entorno de ejecución.
+- Instala las dependencias del proyecto.
+- Copia el código fuente.
+- Expone internamente el puerto `3000`.
 - Ejecuta la aplicación mediante `npm start`.
 - Utiliza un usuario no privilegiado para ejecutar el proceso.
 
+Las dos instancias de la aplicación son creadas utilizando el mismo Dockerfile y el mismo código fuente.
+
 ---
 
-## 14. Docker Compose
+## 10. Docker Compose
 
 El archivo:
 
@@ -408,44 +295,7 @@ El archivo:
 docker-compose.yml
 ```
 
-define los tres servicios de la solución.
-
-### APP-1
-
-Utiliza:
-
-```text
-INSTANCE_NAME=APP-1
-```
-
-### APP-2
-
-Utiliza:
-
-```text
-INSTANCE_NAME=APP-2
-```
-
-Ambas aplicaciones utilizan:
-
-- El mismo código fuente.
-- El mismo Dockerfile.
-- El mismo puerto interno 3000.
-- La misma red Docker.
-
-La diferencia entre ambas se establece mediante la variable de entorno `INSTANCE_NAME`.
-
----
-
-## 15. Red interna
-
-La solución utiliza una red Docker llamada:
-
-```text
-portal-network
-```
-
-Los servicios conectados a esta red son:
+define los servicios:
 
 ```text
 app1
@@ -453,141 +303,153 @@ app2
 nginx
 ```
 
-Dentro de la red, NGINX puede encontrar las aplicaciones mediante:
-
-```text
-app1:3000
-app2:3000
-```
-
-No es necesario utilizar direcciones IP estáticas.
-
----
-
-## 16. Acceso únicamente mediante NGINX
-
-Las instancias de la aplicación utilizan:
-
-```yaml
-expose:
-  - "3000"
-```
-
-y no publican directamente el puerto al sistema anfitrión.
-
-NGINX es el único servicio que utiliza:
-
-```yaml
-ports:
-  - "8080:80"
-```
-
-Por lo tanto:
-
-```text
-http://localhost:8080
-```
-
-es el punto de entrada oficial de la aplicación.
-
-Las direcciones siguientes no forman parte del acceso público del portal:
-
-```text
-http://localhost:3000
-http://localhost:3001
-http://localhost:3002
-```
-
----
-
-## 17. Configuración de NGINX
-
-La configuración se encuentra en:
-
-```text
-nginx/nginx.conf
-```
-
-NGINX cumple tres funciones principales:
-
-### Proxy inverso
-
-Recibe las solicitudes del usuario y las reenvía hacia las instancias internas.
-
-### Enrutamiento
-
-Se configuraron rutas para:
-
-```text
-/
-```
-
-```text
-/noticias/
-```
-
-```text
-/health
-```
-
-### Balanceo de carga
-
-Las instancias se agrupan en:
-
-```nginx
-upstream portal_backend {
-    server app1:3000;
-    server app2:3000;
-}
-```
-
----
-
-## 18. Algoritmo de balanceo utilizado
-
-Se utiliza:
-
-**Round Robin**
-
-NGINX utiliza Round Robin de manera predeterminada cuando no se define otro algoritmo.
-
-El funcionamiento esperado es:
-
-```text
-Solicitud 1 -> APP-1
-Solicitud 2 -> APP-2
-Solicitud 3 -> APP-1
-Solicitud 4 -> APP-2
-Solicitud 5 -> APP-1
-Solicitud 6 -> APP-2
-```
-
-Se seleccionó Round Robin debido a que las dos instancias ejecutan exactamente la misma aplicación y poseen características equivalentes.
-
-El algoritmo permite distribuir las solicitudes entre ambas instancias de manera rotativa.
-
----
-
-## 19. Identificación de la instancia
-
-Cada contenedor recibe una variable de entorno:
+Las dos instancias utilizan el mismo código y se diferencian mediante la variable de entorno:
 
 ```text
 INSTANCE_NAME
 ```
 
-Los valores utilizados son:
+Valores utilizados:
 
 ```text
 APP-1
 APP-2
 ```
 
-La instancia puede identificarse de tres maneras.
+La aplicación utiliza esta variable para mostrar qué instancia atendió cada solicitud.
 
-### Interfaz gráfica
+---
 
-El footer del portal muestra:
+## 11. Red interna
+
+Los servicios se comunican mediante la red:
+
+```text
+portal-network
+```
+
+Los servicios conectados son:
+
+```text
+app1
+app2
+nginx
+```
+
+Dentro de esta red, NGINX puede comunicarse con las aplicaciones utilizando sus nombres de servicio:
+
+```text
+app1:3000
+app2:3000
+```
+
+No se utilizan direcciones IP estáticas.
+
+---
+
+## 12. Acceso a las instancias
+
+`APP-1` y `APP-2` utilizan únicamente el puerto interno:
+
+```text
+3000
+```
+
+Estos servicios no publican sus puertos directamente hacia el host.
+
+NGINX es el único servicio que publica un puerto:
+
+```text
+8080:80
+```
+
+Por lo tanto, el punto de acceso de la aplicación es:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## 13. Configuración de NGINX
+
+La configuración de NGINX se encuentra en:
+
+```text
+nginx/nginx.conf
+```
+
+NGINX cumple las siguientes funciones:
+
+- Punto de entrada del sistema.
+- Proxy inverso.
+- Enrutamiento de solicitudes.
+- Balanceador de carga.
+
+El grupo de servidores backend está definido mediante un `upstream` que contiene:
+
+```text
+app1:3000
+app2:3000
+```
+
+Las solicitudes hacia `/`, `/noticias/` y `/health` son reenviadas a las instancias de la aplicación.
+
+También se conservan encabezados relevantes del proxy, entre ellos:
+
+```text
+Host
+X-Real-IP
+X-Forwarded-For
+X-Forwarded-Proto
+```
+
+NGINX agrega además:
+
+```text
+X-Proxy-By: NGINX
+```
+
+para facilitar la comprobación del paso de la solicitud a través del proxy.
+
+---
+
+## 14. Algoritmo de balanceo utilizado
+
+El algoritmo utilizado es:
+
+**Round Robin**
+
+NGINX utiliza Round Robin de manera predeterminada cuando no se configura otro método de balanceo.
+
+Las solicitudes son distribuidas de forma rotativa entre las dos instancias disponibles.
+
+Ejemplo conceptual:
+
+```text
+Solicitud 1 -> APP-1
+Solicitud 2 -> APP-2
+Solicitud 3 -> APP-1
+Solicitud 4 -> APP-2
+```
+
+Se seleccionó este algoritmo debido a que ambas instancias ejecutan la misma aplicación y poseen las mismas características.
+
+---
+
+## 15. Identificación de la instancia
+
+Cada instancia posee un valor diferente de:
+
+```text
+INSTANCE_NAME
+```
+
+La aplicación permite identificar qué instancia atendió una solicitud mediante tres mecanismos.
+
+### Interfaz del portal
+
+El footer muestra:
 
 ```text
 INSTANCIA: APP-1
@@ -600,6 +462,8 @@ INSTANCIA: APP-2
 ```
 
 ### Endpoint `/health`
+
+Ejemplo:
 
 ```json
 {
@@ -622,25 +486,19 @@ o:
 X-App-Instance: APP-2
 ```
 
-NGINX también agrega:
-
-```text
-X-Proxy-By: NGINX
-```
-
-Esto permite demostrar que la solicitud pasó por el proxy inverso.
-
 ---
 
-## 20. Comprobar el balanceo de carga
+## 16. Procedimiento para comprobar el balanceo de carga
 
-Con todos los contenedores activos:
+Primero verificar que los tres servicios estén activos:
 
 ```bash
 docker compose ps
 ```
 
-En PowerShell pueden realizarse diez solicitudes consecutivas con:
+Luego realizar varias solicitudes consecutivas al endpoint `/health`.
+
+En PowerShell:
 
 ```powershell
 1..10 | ForEach-Object {
@@ -649,7 +507,7 @@ En PowerShell pueden realizarse diez solicitudes consecutivas con:
 }
 ```
 
-La salida debe mostrar respuestas provenientes de las dos instancias.
+Se deben observar respuestas atendidas por las dos instancias.
 
 Ejemplo:
 
@@ -660,25 +518,15 @@ Ejemplo:
 {"status":"ok","instance":"APP-2"}
 ```
 
-Esto demuestra el funcionamiento de Round Robin.
+Esto permite comprobar la distribución Round Robin.
 
----
-
-## 21. Comprobar los encabezados HTTP
-
-Ejecutar:
-
-```bash
-curl -i http://localhost:8080/health
-```
-
-En Windows también puede utilizarse:
+También pueden inspeccionarse los encabezados:
 
 ```powershell
 curl.exe -i http://localhost:8080/health
 ```
 
-Entre los encabezados se espera encontrar:
+Entre ellos se espera encontrar:
 
 ```text
 X-App-Instance: APP-1
@@ -690,7 +538,7 @@ o:
 X-App-Instance: APP-2
 ```
 
-Además:
+junto con:
 
 ```text
 X-Proxy-By: NGINX
@@ -698,35 +546,29 @@ X-Proxy-By: NGINX
 
 ---
 
-## 22. Prueba de continuidad ante caída de una instancia
+## 17. Procedimiento para comprobar la continuidad del servicio
 
-Para detener `APP-1`:
+Para detener temporalmente la primera instancia:
 
 ```bash
 docker compose stop app1
 ```
 
-Verificar:
+Comprobar el estado:
 
 ```bash
 docker compose ps -a
 ```
 
-El estado esperado será:
+Mientras `APP-1` se encuentra detenida, NGINX y `APP-2` permanecen activos.
 
-```text
-app1     Exited
-app2     Up
-nginx    Up
-```
-
-El portal debe continuar disponible en:
+El portal debe continuar disponible mediante:
 
 ```text
 http://localhost:8080
 ```
 
-Para comprobarlo mediante el endpoint de estado:
+Para comprobar qué instancia está respondiendo:
 
 ```powershell
 1..6 | ForEach-Object {
@@ -735,246 +577,104 @@ Para comprobarlo mediante el endpoint de estado:
 }
 ```
 
-Mientras `APP-1` esté detenida, las respuestas deberán provenir de:
+Las respuestas deben provenir de:
 
 ```text
 APP-2
 ```
 
-Ejemplo:
-
-```text
-{"status":"ok","instance":"APP-2"}
-{"status":"ok","instance":"APP-2"}
-{"status":"ok","instance":"APP-2"}
-```
-
----
-
-## 23. Recuperar la instancia detenida
-
-Para volver a iniciar `APP-1`:
+Para recuperar la instancia:
 
 ```bash
 docker compose start app1
 ```
 
-Verificar:
-
-```bash
-docker compose ps
-```
-
-Una vez que vuelva al estado saludable, ejecutar nuevamente varias solicitudes:
-
-```powershell
-1..10 | ForEach-Object {
-    curl.exe -s http://localhost:8080/health
-    Write-Host ""
-}
-```
-
-Nuevamente deberán aparecer:
-
-```text
-APP-1
-APP-2
-```
-
-Esto demuestra que la instancia recuperada vuelve a formar parte del balanceo.
+Después de que vuelva a estar saludable, las solicitudes deben volver a distribuirse entre `APP-1` y `APP-2`.
 
 ---
 
-## 24. Healthchecks
+## 18. Healthchecks
 
-Las dos aplicaciones poseen healthchecks configurados en Docker Compose.
-
-El endpoint utilizado es:
+`APP-1` y `APP-2` incluyen comprobaciones de salud mediante:
 
 ```text
 /health
 ```
 
-Los estados esperados son:
+El objetivo es verificar que el servidor Express se encuentra disponible antes de utilizarlo normalmente como backend.
 
-```text
-app1 -> healthy
-app2 -> healthy
-```
-
-NGINX está configurado para depender de ambas aplicaciones cuando alcanzan el estado saludable durante el arranque inicial.
-
----
-
-## 25. Validar la configuración de NGINX
-
-Ejecutar:
-
-```bash
-docker compose exec nginx nginx -t
-```
-
-Se espera una respuesta similar a:
-
-```text
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-nginx: configuration file /etc/nginx/nginx.conf test is successful
-```
-
----
-
-## 26. Ver logs
-
-### Todos los servicios
-
-```bash
-docker compose logs
-```
-
-### APP-1
-
-```bash
-docker compose logs app1
-```
-
-### APP-2
-
-```bash
-docker compose logs app2
-```
-
-### NGINX
-
-```bash
-docker compose logs nginx
-```
-
-### Seguir logs en tiempo real
-
-```bash
-docker compose logs -f nginx
-```
-
-Para salir del seguimiento de logs:
-
-```text
-Ctrl + C
-```
-
-Esto no detiene los contenedores.
-
----
-
-## 27. Diseño adaptable
-
-El portal fue construido utilizando un diseño editorial inspirado en composición gráfica tipo Swiss.
-
-Características visuales:
-
-- Fondo blanco.
-- Texto negro carbón.
-- Rojo escarlata utilizado únicamente como acento.
-- Retícula editorial asimétrica.
-- Titular principal de gran tamaño.
-- Fotografías de estilo documental.
-- Líneas divisorias.
-- Sin gradientes.
-- Sin glassmorphism.
-- Diseño adaptable a diferentes tamaños de pantalla.
-
-La distribución cambia según el ancho disponible para adaptarse a:
-
-- Computadoras.
-- Tabletas.
-- Teléfonos móviles.
-
----
-
-## 28. Prueba responsive
-
-Puede comprobarse utilizando las herramientas de desarrollo del navegador.
-
-En Google Chrome:
-
-```text
-F12
-```
-
-Después:
-
-```text
-Ctrl + Shift + M
-```
-
-El contenido debe reorganizarse correctamente en diferentes resoluciones.
-
----
-
-## 29. Apagar la solución
-
-Para detener y eliminar los contenedores y la red del proyecto:
-
-```bash
-docker compose down
-```
-
----
-
-## 30. Volver a iniciar la solución
-
-Ejecutar:
-
-```bash
-docker compose up --build -d
-```
-
-Después acceder a:
-
-```text
-http://localhost:8080
-```
-
----
-
-## 31. Prueba de ejecución desde cero
-
-Para comprobar que el proyecto puede ejecutarse desde cero:
-
-```bash
-docker compose down
-```
-
-Luego:
-
-```bash
-docker compose up --build -d
-```
-
-Verificar:
+El estado puede comprobarse mediante:
 
 ```bash
 docker compose ps
 ```
 
-Y finalmente abrir:
+Las aplicaciones deben aparecer como:
 
 ```text
-http://localhost:8080
+healthy
 ```
-
-Esta prueba permite comprobar que la solución completa puede iniciarse mediante un único comando.
 
 ---
 
-## 32. Comandos principales
+## 19. Validación de NGINX
 
-### Construir e iniciar
+Para comprobar que la configuración de NGINX es válida:
+
+```bash
+docker compose exec nginx nginx -t
+```
+
+La respuesta esperada debe indicar que la sintaxis es correcta y que la prueba de configuración fue exitosa.
+
+---
+
+## 20. Aplicación de inteligencia artificial utilizada
+
+La herramienta utilizada para generar o asistir la redacción de las noticias fue:
+
+**ChatGPT de OpenAI**
+
+Cada noticia identifica claramente la herramienta utilizada y señala que el contenido fue revisado para fines académicos.
+
+Los prompts utilizados durante la generación del contenido se encuentran documentados por separado en:
+
+```text
+prompts/prompts.md
+```
+
+Por esta razón, los prompts no se repiten dentro de este README.
+
+---
+
+## 21. Diseño del portal
+
+El portal utiliza un diseño editorial adaptable inspirado en composición gráfica tipo Swiss.
+
+Características principales:
+
+- Fondo blanco.
+- Texto negro carbón.
+- Rojo escarlata como color de acento.
+- Retícula editorial asimétrica.
+- Titular principal destacado.
+- Fotografías relacionadas con cada noticia.
+- Divisiones mediante líneas.
+- Diseño adaptable a computadoras, tabletas y dispositivos móviles.
+- Sin gradientes.
+- Sin glassmorphism.
+
+---
+
+## 22. Comandos principales
+
+### Construir e iniciar toda la solución
 
 ```bash
 docker compose up --build -d
 ```
 
-### Ver servicios
+### Ver el estado de los servicios
 
 ```bash
 docker compose ps
@@ -986,7 +686,7 @@ docker compose ps
 docker compose exec nginx nginx -t
 ```
 
-### Ver balanceo
+### Comprobar balanceo
 
 ```powershell
 1..10 | ForEach-Object {
@@ -1019,7 +719,13 @@ docker compose stop app2
 docker compose start app2
 ```
 
-### Apagar todo
+### Ver logs
+
+```bash
+docker compose logs
+```
+
+### Apagar la solución
 
 ```bash
 docker compose down
@@ -1027,77 +733,77 @@ docker compose down
 
 ---
 
-## 33. Evidencias recomendadas
+## 23. Ejecución desde cero
 
-Para demostrar el funcionamiento del proyecto se recomienda incluir capturas de:
+Para comprobar que el proyecto puede desplegarse nuevamente desde cero:
 
-1. `docker compose up --build -d`.
-2. `docker compose ps` mostrando los tres servicios.
-3. APP-1 y APP-2 en estado saludable.
-4. Portal accedido mediante `http://localhost:8080`.
-5. Página principal con las seis noticias.
-6. Página individual de una noticia.
-7. Diseño responsive.
-8. Identificación visible de ChatGPT.
-9. Identificador visible de `APP-1`.
-10. Identificador visible de `APP-2`.
-11. Varias solicitudes al endpoint `/health`.
-12. Round Robin utilizando ambas instancias.
-13. Header `X-App-Instance`.
-14. Header `X-Proxy-By`.
-15. APP-1 detenida.
-16. APP-2 continuando el servicio.
-17. Recuperación de APP-1.
-18. Regreso del balanceo entre ambas instancias.
-19. Configuración `docker-compose.yml`.
-20. Configuración `nginx.conf`.
-21. Archivo `Dockerfile`.
-22. Validación `nginx -t`.
+```bash
+docker compose down
+```
 
----
+Luego:
 
-## 34. Entregables del proyecto
+```bash
+docker compose up --build -d
+```
 
-El proyecto incluye:
+Verificar:
 
-- Código fuente completo.
-- Dockerfile.
-- `docker-compose.yml`.
-- Configuración de NGINX.
-- Recursos gráficos.
-- README.md.
-- Archivo de prompts utilizados.
-- Evidencias de funcionamiento.
-- Documento PDF de pruebas.
-- Video demostrativo.
+```bash
+docker compose ps
+```
 
----
-
-## 35. Autor
-
-Proyecto desarrollado con fines académicos.
-
-**Portal:** Nexus Tech News  
-**Tecnologías principales:** Node.js, Express, EJS, Docker, Docker Compose y NGINX  
-**IA utilizada:** ChatGPT de OpenAI  
-**Año:** 2026
-
----
-
-## 36. Nota final
-
-Todo el tráfico destinado al portal debe ingresar mediante:
+Finalmente acceder a:
 
 ```text
 http://localhost:8080
 ```
 
-NGINX funciona como punto de entrada único, proxy inverso y balanceador de carga.
-
-Las instancias internas permanecen aisladas dentro de la red Docker y las solicitudes son distribuidas entre `APP-1` y `APP-2` mediante Round Robin.
-
-La solución puede iniciarse completamente mediante:
+La solución completa debe iniciarse mediante el comando:
 
 ```bash
 docker compose up --build -d
+```
+
+---
+
+## 24. Detener el proyecto
+
+Para detener y eliminar los contenedores y la red creada por Docker Compose:
+
+```bash
+docker compose down
+```
+
+Para volver a iniciar el proyecto:
+
+```bash
+docker compose up --build -d
+```
+
+---
+
+## 25. Resumen
+
+Nexus Tech News implementa:
+
+- Una aplicación web de noticias.
+- Seis artículos tecnológicos.
+- Contenido generado o asistido mediante ChatGPT.
+- Dockerfile para la aplicación.
+- Dos instancias de Express.
+- Docker Compose.
+- Red interna entre contenedores.
+- NGINX como proxy inverso.
+- Enrutamiento de solicitudes.
+- Balanceo Round Robin.
+- Identificación de instancias.
+- Healthchecks.
+- Continuidad del servicio al detener una instancia.
+- Diseño responsive.
+
+El portal debe ser consultado mediante:
+
+```text
+http://localhost:8080
 ```
