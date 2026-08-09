@@ -817,6 +817,65 @@ img {
 }
 
 /* =====================================================
+   PAGINA 404
+===================================================== */
+
+.error-page {
+  min-height: 60vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  max-width: 950px;
+
+  padding: 70px 0;
+}
+
+.error-code {
+  color: var(--red);
+
+  font-size: clamp(7rem, 18vw, 15rem);
+  font-weight: 900;
+
+  line-height: 0.75;
+
+  letter-spacing: -10px;
+
+  margin-bottom: 35px;
+}
+
+.error-page h1 {
+  max-width: 800px;
+
+  margin: 15px 0 20px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+
+  line-height: 0.95;
+
+  letter-spacing: -3px;
+}
+
+.error-description {
+  max-width: 650px;
+
+  margin-bottom: 30px;
+
+  color: var(--gray);
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+}
+
+/* =====================================================
    TABLET / PANTALLAS MEDIAS
 ===================================================== */
 
