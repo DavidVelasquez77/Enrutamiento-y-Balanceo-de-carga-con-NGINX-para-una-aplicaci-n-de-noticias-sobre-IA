@@ -789,6 +789,32 @@ img {
   color: var(--black);
 }
 
+/* =====================================================
+   IDENTIFICADOR DE INSTANCIA
+===================================================== */
+
+.instance-indicator {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  padding: 6px 10px;
+
+  border: 1px solid var(--black);
+
+  color: var(--black);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+.instance-indicator strong {
+  color: var(--red);
+}
 
 /* =====================================================
    TABLET / PANTALLAS MEDIAS
