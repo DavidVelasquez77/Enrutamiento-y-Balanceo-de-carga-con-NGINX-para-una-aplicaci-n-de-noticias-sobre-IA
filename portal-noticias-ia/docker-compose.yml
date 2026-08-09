@@ -1,0 +1,42 @@
+services:
+
+  app1:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+
+    environment:
+      PORT: 3000
+      INSTANCE_NAME: APP-1
+
+    expose:
+      - "3000"
+
+    networks:
+      - portal-network
+
+    restart: unless-stopped
+
+
+  app2:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+
+    environment:
+      PORT: 3000
+      INSTANCE_NAME: APP-2
+
+    expose:
+      - "3000"
+
+    networks:
+      - portal-network
+
+    restart: unless-stopped
+
+
+networks:
+
+  portal-network:
+    driver: bridge
